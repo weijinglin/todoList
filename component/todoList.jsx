@@ -1,16 +1,6 @@
 import React, { Component, useRef } from 'react';
 import { Floot } from './todo';
-// export function TodoList(props) {
-//   const { children } = props;
-//   const { count, setCount } = useState(0);
-//   return (
-//     <div className="all">
-//       <section className="todoapp">
-//         <List>{children}</List>
-//       </section>
-//     </div>
-//   );
-// }
+import { List } from './List';
 
 export class TodoList extends React.Component {
   constructor(props) {
@@ -20,6 +10,7 @@ export class TodoList extends React.Component {
       count: 0,
       dolist: new Array(0),
       isdo: new Array(0),
+      which: 0,
     };
     this.handleKey = this.handleKey.bind(this);
   }
@@ -72,6 +63,45 @@ export class TodoList extends React.Component {
     });
   };
 
+  selectall() {
+    const copy1 = this.state.isdo.slice();
+    const copy2 = this.state.dolist.slice();
+    let num = this.state.count;
+    for (let i = 0; i < this.state.count; ++i) {
+      if (copy1[i] === true) {
+        copy1.splice(i, 1);
+        copy2.splice(i, 1);
+        i--;
+        num -= 1;
+      }
+    }
+    const arr = document.getElementsByClassName('toggle');
+    for (let i = 0; i < arr.length; ++i) {
+      if (arr[i].checked) {
+        arr[i].checked = false;
+      }
+    }
+    this.setState({
+      dolist: copy2,
+      isdo: copy1,
+      count: num,
+    });
+  }
+
+  alltrue() {
+    const arr = document.getElementsByClassName('toggle');
+    const copy1 = this.state.isdo.slice();
+    for (let i = 0; i < arr.length; ++i) {
+      arr[i].checked = true;
+    }
+    for (let i = 0; i < this.state.count; i++) {
+      copy1[i] = true;
+    }
+    this.setState({
+      isdo: copy1,
+    });
+  }
+
   render() {
     const disPlay = {
       display: 'none',
@@ -92,6 +122,10 @@ export class TodoList extends React.Component {
               />
             </header>
             <section className="main">
+              <input type="checkbox" id="toggle-all" className="toggle-all" />
+              <label htmlFor="toggle-all" onClick={this.alltrue.bind(this)}>
+                ::before
+              </label>
               <ul className="todo-list">
                 {this.state.dolist.map((item, index) => (
                   <li
@@ -100,6 +134,7 @@ export class TodoList extends React.Component {
                     <input
                       type="checkbox"
                       className="toggle"
+                      id={`box${index}`}
                       onClick={this.binggo.bind(this, index)}
                     />
                     <label>{item}</label>
@@ -110,7 +145,11 @@ export class TodoList extends React.Component {
                 ))}
               </ul>
             </section>
-            <Floot count={this.state.count} />
+            <Floot
+              count={this.state.count}
+              what={this.state.which}
+              selall={this.selectall.bind(this)}
+            />
           </div>
         </section>
       </div>

@@ -4,23 +4,7 @@ import { TodoList } from './component/todoList';
 import './App.css';
 
 function App() {
-  return (
-    // <div className="all">
-    //   <section className="todoapp">
-    //     <div>
-    //       <header className="header">
-    //         <h1>todos</h1>
-    //         <input
-    //           type="text"
-    //           className="new-todo"
-    //           placeholder="what need to be?"
-    //         />
-    //       </header>
-    //     </div>
-    //   </section>
-    // </div>
-    <TodoList>todos</TodoList>
-  );
+  return <TodoList>todos</TodoList>;
 }
 
 export default App;

@@ -14,7 +14,7 @@
 // }
 
 export function Floot(props) {
-  const { count, which, selall } = props;
+  const { count, which, selall, zero, one, two } = props;
   if (count !== 0) {
     return (
       <footer className="footer">
@@ -25,16 +25,16 @@ export function Floot(props) {
           <span> left</span>
         </span>
         <ul className="filters">
-          <li className={which === 0 ? 'selected' : ''}>
-            <a href="#/">All</a>
+          <li className={props.which === 0 ? 'selected' : ''}>
+            <button onClick={zero}> All </button>
           </li>
           <span> </span>
-          <li className={which === 1 ? 'selected' : ''}>
-            <a href="#/active">Active</a>
+          <li className={props.which === 1 ? 'selected' : ''}>
+            <button onClick={one}> Active </button>
           </li>
           <span> </span>
-          <li className={which === 2 ? 'selected' : ''}>
-            <a href="#/completed">Completed</a>
+          <li className={props.which === 2 ? 'selected' : ''}>
+            <button onClick={two}> Completed </button>
           </li>
         </ul>
         <button className="clear-completed" onClick={selall}>

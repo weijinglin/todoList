@@ -11,8 +11,12 @@ export class TodoList extends React.Component {
       dolist: new Array(0),
       isdo: new Array(0),
       which: 0,
+      all: false,
     };
     this.handleKey = this.handleKey.bind(this);
+    this.zero = this.zero.bind(this);
+    this.one = this.one.bind(this);
+    this.two = this.two.bind(this);
   }
 
   handleDesory(index) {
@@ -91,21 +95,65 @@ export class TodoList extends React.Component {
   alltrue() {
     const arr = document.getElementsByClassName('toggle');
     const copy1 = this.state.isdo.slice();
+    const jug = this.state.all;
     for (let i = 0; i < arr.length; ++i) {
-      arr[i].checked = true;
+      arr[i].checked = !this.state.all;
     }
     for (let i = 0; i < this.state.count; i++) {
-      copy1[i] = true;
+      copy1[i] = !this.state.all;
     }
     this.setState({
       isdo: copy1,
+      all: !jug,
     });
   }
 
+  zero() {
+    if (this.state.which === 0) {
+    } else {
+      this.setState({
+        which: 0,
+      });
+    }
+  }
+
+  one() {
+    if (this.state.which === 1) {
+    } else {
+      this.setState({
+        which: 1,
+      });
+    }
+  }
+
+  two() {
+    if (this.state.which === 2) {
+    } else {
+      this.setState({
+        which: 2,
+      });
+    }
+  }
+
   render() {
-    const disPlay = {
-      display: 'none',
-    };
+    let arr;
+    if (this.state.which === 0) {
+      arr = this.state.dolist.slice();
+    } else if (this.state.which === 1) {
+      arr = [];
+      for (let i = 0; i < this.state.count; ++i) {
+        if (this.state.isdo[i] !== true) {
+          arr.push(this.state.dolist[i]);
+        }
+      }
+    } else {
+      arr = [];
+      for (let i = 0; i < this.state.count; ++i) {
+        if (this.state.isdo[i] === true) {
+          arr.push(this.state.dolist[i]);
+        }
+      }
+    }
     return (
       <div className="all">
         <section className="todoapp">
@@ -127,7 +175,7 @@ export class TodoList extends React.Component {
                 ::before
               </label>
               <ul className="todo-list">
-                {this.state.dolist.map((item, index) => (
+                {arr.map((item, index) => (
                   <li
                     key={index}
                     className={this.state.isdo[index] ? 'completed' : ''}>
@@ -149,6 +197,9 @@ export class TodoList extends React.Component {
               count={this.state.count}
               what={this.state.which}
               selall={this.selectall.bind(this)}
+              zero={this.zero}
+              one={this.one}
+              two={this.two}
             />
           </div>
         </section>

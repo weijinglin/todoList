@@ -178,11 +178,20 @@ export class TodoList extends React.Component {
                 {arr.map((item, index) => (
                   <li
                     key={index}
-                    className={this.state.isdo[index] ? 'completed' : ''}>
+                    className={
+                      (this.state.isdo[index] || this.state.which == 2) &&
+                      this.state.which != 1
+                        ? 'completed'
+                        : ''
+                    }>
                     <input
                       type="checkbox"
                       className="toggle"
                       id={`box${index}`}
+                      checked={
+                        (this.state.isdo[index] || this.state.which == 2) &&
+                        this.state.which != 1
+                      }
                       onClick={this.binggo.bind(this, index)}
                     />
                     <label>{item}</label>

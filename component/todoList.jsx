@@ -1,6 +1,5 @@
 import React, { Component, useRef } from 'react';
 import { Floot } from './todo';
-import { List } from './List';
 
 export class TodoList extends React.Component {
   constructor(props) {

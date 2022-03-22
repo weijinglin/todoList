@@ -1,18 +1,3 @@
-// export function Inputs(props) {
-//   const { classs, place } = props;
-
-//   return (
-//     <input
-//       type="text"
-//       className={classs}
-//       placeholder={place}
-//       fontStyle="italic"
-//       fontWeight="300"
-//       color="#e6e6e6"
-//     />
-//   );
-// }
-
 export function Floot(props) {
   const { count, which, selall, zero, one, two } = props;
   if (count !== 0) {
@@ -26,15 +11,24 @@ export function Floot(props) {
         </span>
         <ul className="filters">
           <li className={props.which === 0 ? 'selected' : ''}>
-            <button onClick={zero}> All </button>
+            <a onClick={zero} href="#/">
+              {' '}
+              All{' '}
+            </a>
           </li>
           <span> </span>
           <li className={props.which === 1 ? 'selected' : ''}>
-            <button onClick={one}> Active </button>
+            <a onClick={one} href="#/">
+              {' '}
+              Active{' '}
+            </a>
           </li>
           <span> </span>
           <li className={props.which === 2 ? 'selected' : ''}>
-            <button onClick={two}> Completed </button>
+            <a onClick={two} href="#/">
+              {' '}
+              Completed{' '}
+            </a>
           </li>
         </ul>
         <button className="clear-completed" onClick={selall}>
